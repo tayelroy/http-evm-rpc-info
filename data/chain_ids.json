@@ -1,0 +1,104 @@
+{
+  "1": {
+    "name": "Ethereum Mainnet",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "10": {
+    "name": "OP Mainnet (Optimism)",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "56": {
+    "name": "BNB Smart Chain Mainnet",
+    "native_currency": "BNB",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "100": {
+    "name": "Gnosis Chain",
+    "native_currency": "xDAI",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "137": {
+    "name": "Polygon Mainnet",
+    "native_currency": "POL",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "250": {
+    "name": "Fantom Opera",
+    "native_currency": "FTM",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "324": {
+    "name": "zkSync Era Mainnet",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "1101": {
+    "name": "Polygon zkEVM",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "1337": {
+    "name": "Geth Local Devnet",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "8453": {
+    "name": "Base Mainnet",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "42161": {
+    "name": "Arbitrum One",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "43114": {
+    "name": "Avalanche C-Chain",
+    "native_currency": "AVAX",
+    "rpc_default_port": 9650,
+    "p2p_default_port": 9651
+  },
+  "59144": {
+    "name": "Linea Mainnet",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "81457": {
+    "name": "Blast Mainnet",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "31337": {
+    "name": "Hardhat / Anvil Local Devnet",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": null
+  },
+  "11155111": {
+    "name": "Sepolia Testnet",
+    "native_currency": "SEP",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  },
+  "17000": {
+    "name": "Holesky Testnet",
+    "native_currency": "ETH",
+    "rpc_default_port": 8545,
+    "p2p_default_port": 30303
+  }
+}
