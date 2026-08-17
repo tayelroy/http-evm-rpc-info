@@ -72,33 +72,37 @@ end
 
 -- Tier 2: Behavioral heuristic analysis using error signatures and vendor namespaces
 local function probe_behavioral_heuristics(host, port, path, options)
-  -- 1. Probe non-existent method to check error message phrasing
-  local payload_err = make_rpc_payload(99, "probe_checkImplementation")
-  local res_err = http.post(host, port, path, options, nil, payload_err)
-  
   local inferred_vendor = nil
   local heuristics_note = nil
 
+  -- 1. Probe non-existent method to check error code & message phrasing
+  local payload_err = make_rpc_payload(99, "probe_checkImplementation")
+  local res_err = http.post(host, port, path, options, nil, payload_err)
+  
   if res_err and res_err.status == 200 then
     local st, parsed = json.parse(res_err.body)
-    if st and parsed and parsed.error then
-      local err_msg = parsed.error.message or ""
-      if string.find(err_msg, "the method probe_checkImplementation does not exist") then
-        inferred_vendor = "Geth (or Go-Ethereum derivative)"
-        heuristics_note = "Matched Geth -32601 error message syntax"
-      elseif string.find(err_msg, "Method not found") or string.find(err_msg, "Method probe_checkImplementation not found") then
-        inferred_vendor = "Besu / Nethermind / OpenEthereum"
-        heuristics_note = "Matched standard Method not found error syntax"
+    if st and type(parsed) == "table" and parsed.error then
+      local err_code = parsed.error.code
+      local err_msg = tostring(parsed.error.message or "")
+
+      if err_code == -32601 or err_code == nil then
+        if string.find(err_msg, "the method probe_checkImplementation does not exist", 1, true) then
+          inferred_vendor = "Geth (or Go-Ethereum derivative)"
+          heuristics_note = "Matched Geth -32601 error message syntax"
+        elseif string.find(err_msg, "Method not found", 1, true) or string.find(err_msg, "Method probe_checkImplementation not found", 1, true) then
+          inferred_vendor = "Besu / Nethermind / Reth / Anvil"
+          heuristics_note = "Matched standard JSON-RPC -32601 Method not found syntax"
+        end
       end
     end
   end
 
-  -- 2. Probe Erigon namespace
+  -- 2. Probe Erigon namespace (Refines generic inference to Erigon)
   local payload_erigon = make_rpc_payload(100, "erigon_forks")
   local res_erigon = http.post(host, port, path, options, nil, payload_erigon)
   if res_erigon and res_erigon.status == 200 then
     local st_e, parsed_e = json.parse(res_erigon.body)
-    if st_e and parsed_e and not parsed_e.error then
+    if st_e and type(parsed_e) == "table" and not parsed_e.error then
       inferred_vendor = "Erigon"
       heuristics_note = "Exposes active erigon_* namespace"
     end
@@ -109,7 +113,7 @@ local function probe_behavioral_heuristics(host, port, path, options)
   local res_hardhat = http.post(host, port, path, options, nil, payload_hardhat)
   if res_hardhat and res_hardhat.status == 200 then
     local st_h, parsed_h = json.parse(res_hardhat.body)
-    if st_h and parsed_h and not parsed_h.error then
+    if st_h and type(parsed_h) == "table" and not parsed_h.error then
       inferred_vendor = "Hardhat Network"
       heuristics_note = "Exposes active hardhat_* namespace"
     end
@@ -119,7 +123,7 @@ local function probe_behavioral_heuristics(host, port, path, options)
   local res_anvil = http.post(host, port, path, options, nil, payload_anvil)
   if res_anvil and res_anvil.status == 200 then
     local st_a, parsed_a = json.parse(res_anvil.body)
-    if st_a and parsed_a and not parsed_a.error then
+    if st_a and type(parsed_a) == "table" and not parsed_a.error then
       inferred_vendor = "Anvil (Foundry)"
       heuristics_note = "Exposes active anvil_* namespace"
     end
