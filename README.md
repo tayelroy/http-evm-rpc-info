@@ -11,7 +11,7 @@ Unlike basic banner grabbers that fail when standard methods (`web3_clientVersio
 
 ---
 
-## 🔍 Features
+## Features
 
 * **Multi-Tiered Inspection Pipeline**:
   * **Tier 1 (Standard RPC)**: Probes `web3_clientVersion`, `eth_chainId`, `eth_blockNumber`, and `net_peerCount`.
@@ -24,7 +24,7 @@ Unlike basic banner grabbers that fail when standard methods (`web3_clientVersio
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 http-evm-rpc-info/
@@ -42,7 +42,7 @@ http-evm-rpc-info/
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Option 1: Symlink into Local Nmap Directory (Recommended)
 ```bash
@@ -59,7 +59,7 @@ sudo nmap --script-updatedb
 
 ---
 
-## 🛠️ Usage
+## Usage
 
 ### Scan Default EVM RPC Ports (8545, 8546, 7545, 8551)
 ```bash
@@ -78,7 +78,7 @@ nmap -sT -Pn --script ./http-evm-rpc-info.nse -p 8545 <target-ip>
 
 ---
 
-## 📊 Sample Output
+## Sample Output
 
 ### Level 1: Full Visibility (Standard Exposed Node)
 ```text
@@ -117,7 +117,7 @@ PORT     STATE SERVICE
 
 ---
 
-## 🧪 Testing & Validation
+## Testing & Validation
 
 Run the included automated integration test suite:
 
@@ -130,12 +130,12 @@ The test runner spins up `mock_rpc_server.py` across 6 distinct profiles (`geth`
 
 ---
 
-## 📖 Deep Dive
+## Deep Dive
 
 For an in-depth explanation of the technical architecture, JSON-RPC error divergence, DevP2P fallback mechanics, and security implications, read [`docs/article.md`](docs/article.md).
-
+I also wrote up the story behind this script — why I built it and how the fingerprinting works — on Substack: [A Custom NSE Script to Scan for EVM Nodes](https://tayelroy.substack.com/p/a-custom-nse-script-to-scan-for-evm).
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the [MIT License](LICENSE).
