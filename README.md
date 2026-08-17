@@ -133,7 +133,9 @@ The test runner spins up `mock_rpc_server.py` across 6 distinct profiles (`geth`
 ## Deep Dive
 
 For an in-depth explanation of the technical architecture, JSON-RPC error divergence, DevP2P fallback mechanics, and security implications, read [`docs/article.md`](docs/article.md).
-I also wrote up the story behind this script — why I built it and how the fingerprinting works — on Substack: [A Custom NSE Script to Scan for EVM Nodes](https://tayelroy.substack.com/p/a-custom-nse-script-to-scan-for-evm).
+
+I also wrote why I built it and how the fingerprinting works on Substack: [A Custom NSE Script to Scan for EVM Nodes](https://tayelroy.substack.com/p/a-custom-nse-script-to-scan-for-evm).
+
 ---
 
 ## License
