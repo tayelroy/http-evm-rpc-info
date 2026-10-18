@@ -16,7 +16,7 @@ Unlike basic banner grabbers that fail when standard methods (`web3_clientVersio
 * **Multi-Tiered Inspection Pipeline**:
   * **Tier 1 (Standard RPC)**: Probes `web3_clientVersion`, `eth_chainId`, `eth_blockNumber`, and `net_peerCount`.
   * **Tier 2 (Behavioral & Error Heuristics)**: Inspects JSON-RPC `-32601` error syntax variations (e.g. Geth's `"the method ... does not exist/is not available"` vs. Besu/Nethermind's `"Method not found"`) and probes vendor-specific namespaces (`erigon_*`, `hardhat_*`, `anvil_*`).
-  * **Tier 3 (P2P Layer Handshake Spec)**: Identifies nodes behind stripped HTTP endpoints for DevP2P RLPx handshake correlation on port `30303`.
+  * **Tier 3 (P2P Layer Handshake — planned, not implemented)**: A future DevP2P RLPx check on port `30303` for nodes whose HTTP RPC is stripped or unreachable. The script does not connect to port 30303 or perform an RLPx handshake.
   * **Tier 4 (Hardened/Filtered)**: Diagnoses JWT-protected Engine API endpoints (HTTP 401 on port 8551) and WAF/firewall blocks (HTTP 403).
 * **Visibility Level Classification**: Categorizes target exposure into standard security levels (Level 1: Full Visibility, Level 2: Inferred, Level 4: Hardened).
 * **EVM Chain Metadata**: Maps chain IDs to human-readable network names across mainnets, L2s, and testnets.
@@ -115,6 +115,8 @@ PORT     STATE SERVICE
 |_  Note: Engine API (:8551) or Basic Auth required; bypass via P2P DevP2P layer (Port 30303)
 ```
 
+That `Note` is text the script prints on HTTP 401. It does not open port 30303 or complete a DevP2P handshake.
+
 ---
 
 ## Testing & Validation
@@ -132,7 +134,7 @@ The test runner spins up `mock_rpc_server.py` across 6 distinct profiles (`geth`
 
 ## Deep Dive
 
-For an in-depth explanation of the technical architecture, JSON-RPC error divergence, DevP2P fallback mechanics, and security implications, read [`docs/article.md`](docs/article.md).
+For an in-depth explanation of the technical architecture, JSON-RPC error divergence, and security implications, read [`docs/article.md`](docs/article.md). That write-up also describes a DevP2P RLPx fallback; that check is not implemented in the script.
 
 I also wrote why I built it and how the fingerprinting works on Substack: [A Custom NSE Script to Scan for EVM Nodes](https://tayelroy.substack.com/p/a-custom-nse-script-to-scan-for-evm).
 

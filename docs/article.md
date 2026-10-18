@@ -129,7 +129,7 @@ description = [[
 Performs multi-tiered reconnaissance and fingerprinting against Ethereum and EVM-compatible nodes.
 ]]
 
-author = "Deep Research Agent"
+author = "Elroy Tay"
 license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
 categories = {"discovery", "safe", "version"}
 

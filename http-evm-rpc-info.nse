@@ -31,7 +31,7 @@ Implements a fallback inspection pipeline:
 -- |_  Peer Count: 25
 ---
 
-author = "Deep Research Agent"
+author = "Elroy Tay"
 license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
 categories = {"discovery", "safe", "version"}
 
